@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="icon" href="https://www.r-project.org/Rlogo.png" type="image/gif" sizes="16x16">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <script src="js/script.js"></script>
+    <title>R Compiler by DKM</title>
+    
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/social-buttons.css" rel="stylesheet">
+   
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+     <link rel="stylesheet" href= "https://raw.githubusercontent.com/noizwaves/bootstrap-social-buttons/v1.0.0/social-buttons.css">
+    <!--
+   
+-->
+    <!-- Custom CSS -->
+    <link href="css/thumbnail-gallery.css" rel="stylesheet">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// 
+    
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+-->
+
+<script type="text/javascript">var switchTo5x=true;</script>
+<script type="text/javascript" src="https://ws.sharethis.com/button/buttons.js"></script>
+<script type="text/javascript">stLight.options({publisher: "99c816f5-3cf6-4061-9166-f16889297b3c", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
+</head>
+
+<body>
+
+ <div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.5";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+    
+    
+    <!-- Page Content -->
+       <div class="jumbotron">
+    <div class="container">
+        <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-lg-12">
+                <h3 class="page-header">R Compiler</h3>
+                <p>
+                Enter your R code or script in the text area and click Submit, you can try a sample code to see how it works!
+                </p>
+            </div>
+            <div class="col-lg-12">
+                <A NAME="Introduction"></A>
+ 
+            </div>
+             <div class="container-fluid">
+         
+                <P>
+<FORM onSubmit = "return checkData(this)"
+action="http://pbil.univ-lyon1.fr/cgi-bin/Rweb/Rweb.cgi"
+enctype="multipart/form-data"   
+method="post" target="demo" name="myForm">
+<TEXTAREA id="inputTextToSave" class="form-control" NAME="Rcode" ROWS=10 COLS=80>
+
+</TEXTAREA> <P>
+                
+       
+                    </div>
+            
+            <div class="container">
+  <div class="row">
+      <p>
+    
+      </p>
+      <div class=" col-xs-6 col-md-12">
+    <input type="submit" value="Submit" class="btn btn-success btn-lg" data-toggle="modal" data-target="#myModal">
+    <input type="reset" value="Clear All" class="btn btn-danger btn-lg">
+    <input type="submit" value="Save Code" class="btn btn-warning btn-lg" onclick="saveTextAsFile()">
+    <input type="submit" value="Enter Sample Code & Run" class="btn btn-primary btn-lg" id="txtbtn" data-toggle="modal" data-target="#myModal">      
+    <a role="button" class="btn btn-danger btn-lg" href="https://www.datacamp.com/community/tutorials">DataCamp Tutorials</a>
+             <a role="button" class="btn btn-success btn-lg" href="http://www.r-fiddle.org/#/">R-Fiddle</a>
+            <a role="button" class="btn btn-info btn-lg" href="http://www.statmethods.net/">Quick-R</a>  
+          <input type="submit" value="R Libraries" class="btn btn-success btn-lg" data-toggle="modal" id="libtxt" data-target="#myModal">  
+         
+</div> 
+      <div class=" col-xs-6 col-md-12">
+     <p></p>
+          <p></p>
+      </div>  
+    
+ <div class=" col-xs-6 col-md-6">
+     
+      <p>Save the file with a name:</p>   
+  <input id="inputFileNameToSaveAs" class="form-control btn-lg" placeholder="Name of your Script" size="30"></input>
+      <p></p>
+      <p>
+	<button onclick="saveTextAsFile()" class="btn btn-primary btn-lg">Save Script to File</button></p>
+    </div>
+    <div class=" col-xs-6 col-md-6">
+        <p>Select a File to Load:</p>   <p></p>         
+		 <div class="fileinput fileinput-new" data-provides="fileinput">
+    <span class="btn btn-info btn-file"><span>Choose file</span><input type="file" /></span>
+    <span class="fileinput-filename"></span><span class="fileinput-new">No file chosen</span>
+</div><p></p>
+		<button onclick="loadFileAsText()" class="btn btn-primary btn-lg">Load Selected File</button>
+	</div>
+ 
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+      <a role="button" class="btn btn-success" href="https://www.r-project.org/other-docs.html">Learn More About R</a>
+      
+      </div>
+      <div class="modal-body">
+         <div class="wrapper">
+    <div class="h_iframe">
+        <!-- a transparent image is preferable -->
+        <img class="ratio" src="http://placehold.it/16x9"/>
+        <iframe name="demo" src="http://pbil.univ-lyon1.fr/cgi-bin/Rweb/Rweb.cgi" frameborder="0" allowfullscreen></iframe>
+    </div>
+   
+</div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal" id="downy">Close</button>
+       
+      </div>
+    </div>
+  </div>
+</div>
+      
+      
+  </div>
+</div>
+            
+<h3> <u>External Data Entry</u> </h3>
+
+<p>
+There are three ways to enter data for use in your <b>Rweb</b> session :<br>
+<b>1-</b> a text area where you can paste a dataframe.<br>
+<b>2-</b> a text area where you can enter the
+URL for a Web accessible dataset<br>
+<b>3-</b> a browse button for selecting a
+dataset on your computer<br>
+Of course, you should use only one of these three ways.
+</p>
+<p>
+Either way, the dataset will be read in using 
+  <b>read.table</b></a> 
+with <b>header=T</b>
+and stored in a dataframe called <b>X</b>.
+The dataframe, <b>X</b>, will then be attached so you can use the
+variable names. 
+Temporary files are stored in a secure server. 
+Eventually I hope to add several other options for data entry ... let me
+know if you have any suggestions.
+</p>
+
+<p>
+<b>1-</b> Paste a dataframe here : <br>
+<textarea class="form-control" name="datatab" rows="6" cols="80"></textarea>
+</p>
+<i>or</i>
+<p>
+<b>2-</b> Enter a dataset URL : 
+<input type="text" class="form-control" placeholder="URL for dataset" size="60">
+</p>
+<i>or</i>
+<p>
+<b>3-</b> Select a local file to submit:
+            
+ <div class="input-group">
+                <span class="input-group-btn">
+                    <span class="btn btn-info btn-file">
+                        Browse File(s) :<input type="file" multiple>
+                    </span>
+                </span>
+                <input type="text" class="form-control" readonly>
+            </div>            
+</p>                
+</form>
+<br>
+
+        <!-- Footer -->
+        <footer>
+            
+                     <br><br>
+      
+            
+            <div class=" col-xs-6 col-md-12">  
+               <div id="disqus_thread"></div>
+<script>
+/**
+* RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+* LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL; // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+
+s.src = '//rwebdev.disqus.com/embed.js';
+
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+            </div>
+        </footer>
+
+    </div>
+        </div>
+        </div>
+    <!-- /.container -->
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+        
+        <script src="js/script.js"></script>
+        <script id="dsq-count-scr" src="//rwebdev.disqus.com/count.js" async></script>
+<script type='text/javascript'>
+
+function saveTextAsFile()
+{      
+// grab the content of the form field and place it into a variable
+    var textToWrite = document.getElementById("inputTextToSave").value;
+//  create a new Blob (html5 magic) that conatins the data from your form feild
+    var textFileAsBlob = new Blob([textToWrite], {type:'text/plain'});
+// Specify the name of the file to be saved
+    var fileNameToSaveAs = "Script.R";
+    
+// Optionally allow the user to choose a file name by providing 
+// an imput field in the HTML and using the collected data here
+// var fileNameToSaveAs = txtFileName.text;
+
+// create a link for our script to 'click'
+    var downloadLink = document.createElement("a");
+//  supply the name of the file (from the var above).
+// you could create the name here but using a var
+// allows more flexability later.
+    downloadLink.download = fileNameToSaveAs;
+// provide text for the link. This will be hidden so you
+// can actually use anything you want.
+    downloadLink.innerHTML = "My Hidden Link";
+    
+// allow our code to work in webkit & Gecko based browsers
+// without the need for a if / else block.
+    window.URL = window.URL || window.webkitURL;
+          
+// Create the link Object.
+    downloadLink.href = window.URL.createObjectURL(textFileAsBlob);
+// when link is clicked call a function to remove it from
+// the DOM in case user wants to save a second file.
+    downloadLink.onclick = destroyClickedElement;
+// make sure the link is hidden.
+    downloadLink.style.display = "none";
+// add the link to the DOM
+    document.body.appendChild(downloadLink);
+    
+// click the new link
+    downloadLink.click();
+}
+
+function destroyClickedElement(event)
+{
+// remove the link from the DOM
+    document.body.removeChild(event.target);
+}
+
+
+
+function loadFileAsText()
+{
+	var fileToLoad = document.getElementById("fileToLoad").files[0];
+
+	var fileReader = new FileReader();
+	fileReader.onload = function(fileLoadedEvent) 
+	{
+		var textFromFileLoaded = fileLoadedEvent.target.result;
+		document.getElementById("inputTextToSave").value = textFromFileLoaded;
+	};
+	fileReader.readAsText(fileToLoad, "UTF-8");
+}
+
+</script>
+</body>
+
+</html>
